@@ -6,14 +6,22 @@
   "license": "0BSD",
   "scripts": {
     "build": "gatsby build",
+    "dev": "npm run clean && gatsby develop",
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "clean": "gatsby clean"
   },
   "dependencies": {
     "gatsby": "^5.4.0",
+    "gatsby-plugin-catch-links": "^5.4.0",
+    "gatsby-plugin-image": "^3.4.0",
+    "gatsby-plugin-sharp": "^5.4.0",
+    "gatsby-remark-images": "^7.4.0",
+    "gatsby-remark-obsidian": "^0.5.0",
+    "gatsby-source-filesystem": "^5.4.0",
+    "gatsby-transformer-remark": "^6.4.0",
+    "gatsby-transformer-sharp": "^5.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -23,5 +31,8 @@
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
+  },
+  "devDependencies": {
+    "slugify": "^1.6.5"
   }
 }
