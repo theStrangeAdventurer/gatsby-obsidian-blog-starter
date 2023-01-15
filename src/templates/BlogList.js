@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import { Pagination } from "../components/Pagination";
-
+import { UserInfo } from "../components/UserInfo";
 /**
  * Запрос для получения списка постов, отсортированных по дате
  * 
@@ -41,7 +41,7 @@ export default function BlogList(props) {
 
     return (
         <div>
-            <h1>Blog List</h1>
+            <UserInfo />
             {edges.map(({ node }) => {
                 const { slug, title } = node.fields;
                 const { date } = node.frontmatter;
