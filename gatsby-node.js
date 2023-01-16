@@ -27,7 +27,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     createNodeField({
       name: `title`,
       node,
-      value: value,
+      value: value.replace(/(^\/|\/$)/g, ''),
     })
   }
 }
@@ -57,7 +57,7 @@ exports.createPages = async function ({ actions, graphql }) {
   `)
 
   const posts = data.allMarkdownRemark.edges
-  const POSTS_PER_PAGE = 5 // Определяем сколько постов будет на одной странице
+  const POSTS_PER_PAGE = 8 // Определяем сколько постов будет на одной странице
   const numPages = Math.ceil(posts.length / POSTS_PER_PAGE) // Считаем сколько всего страниц
 
   /**

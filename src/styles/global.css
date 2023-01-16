@@ -1,0 +1,46 @@
+@tailwind base;
+
+/*
+ * Описываем базовые стили для всего
+ * только так мы можем стилизовать статьи
+ */
+@layer base {
+    html {
+        @apply tracking-tighter text-slate-800;
+    }
+    
+    h1 {
+        @apply mb-6 text-4xl text-black;
+    }
+    
+    h2 {
+        @apply mt-4 mb-4 text-2xl font-medium text-black;
+    }
+    
+    h3 {
+        @apply mt-2 mb-2 text-xl font-medium text-black;
+    }
+    
+    p {
+        @apply text-lg;
+    }
+    
+    .gatsby-resp-image-wrapper {
+        @apply mb-2 mt-2;
+    }
+
+    small {
+        @apply text-sm;
+    }
+    
+    time {
+        @apply text-sm;
+    }
+    
+    a {
+        @apply text-indigo-600 hover:underline hover:text-indigo-900 transition-all ease-in-out duration-200;
+    }
+
+}
+@tailwind components;
+@tailwind utilities;

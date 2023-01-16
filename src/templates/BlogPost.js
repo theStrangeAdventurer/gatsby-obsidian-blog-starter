@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 
 /**
  * Запрос для получения одного поста по его slug
@@ -11,15 +11,10 @@ export const query = graphql`
     query BlogPageQuery($slug: String!) {
         markdownRemark(fields: {slug: {eq: $slug}}) {
             html
-        }
-        site {
-            siteMetadata {
-                description
-                social {
-                    siteUrl
-                    twitter
-                    twitterUsername
-                }
+            frontmatter {
+                date
+            }
+            fields {
                 title
             }
         }
@@ -31,6 +26,15 @@ export const query = graphql`
  */
 export default function BlogPage(props) {
     const { markdownRemark } = props.data;
-    const { html } = markdownRemark;
-    return <div dangerouslySetInnerHTML={{ __html: html }}></div>
+    const { html, fields, frontmatter } = markdownRemark;
+    const { title } = fields;
+    const { date } = frontmatter;
+    return <div className='container mx-auto px-4 mt-16'>
+        <h1 className='text-4xl font-bold mb-4'>{title}</h1>
+        <div className='flex gap-2 mb-4'>
+            <Link to='/' className='text-indigo-600'>{'Назад'}</Link>
+            <span className='text-gray-300'>{date}</span>
+        </div>
+        <div dangerouslySetInnerHTML={{ __html: html }}/>
+    </div>
 }

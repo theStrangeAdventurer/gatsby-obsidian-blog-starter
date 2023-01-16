@@ -2,6 +2,7 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import { Pagination } from "../components/Pagination";
 import { UserInfo } from "../components/UserInfo";
+
 /**
  * Запрос для получения списка постов, отсортированных по дате
  * 
@@ -26,6 +27,7 @@ export const blogListQuery = graphql`
             title
             date
           }
+          excerpt
         }
       }
     }
@@ -40,20 +42,23 @@ export default function BlogList(props) {
     const { edges } = allMarkdownRemark;
 
     return (
-        <div>
+        <div className='container mx-auto px-4 mt-16 relative'>
             <UserInfo />
-            {edges.map(({ node }) => {
-                const { slug, title } = node.fields;
-                const { date } = node.frontmatter;
-                return (
-                    <div key={slug}>
-                        <h2>
+            <div className='grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8'>
+              {edges.map(({ node }) => {
+                  const { slug, title } = node.fields;
+                  const { date } = node.frontmatter;
+                  return (
+                      <div className="mb-4" key={slug}>
+                          <h2 className="text-bold text-2xl">
                             <Link to={`/${slug}/`}>{title}</Link>
-                        </h2>
-                        <p>{date}</p>
-                    </div>
-                )
-            })}
+                          </h2>
+                          <p className="text-gray-500">{node.excerpt}</p>
+                          <span className="text-gray-300" >{date}</span>
+                      </div>
+                  )
+              })}
+            </div>
             <Pagination pageContext={props.pageContext} />
         </div>
     )

@@ -1,3 +1,4 @@
+const slufify = require('slugify');
 /**
  * Configure your Gatsby site with this file.
  *
@@ -11,20 +12,18 @@ module.exports = {
   siteMetadata: {
     social: {
       twitter: 'https://twitter.com/the_strange_dev',
+      github: 'https://github.com/theStrangeAdventurer?tab=repositories',
       siteUrl: 'https://thestrangeadventurer.com',
       twitterUsername: '@the_strange_dev',
+      profileImage: '/profile.jpg'
     },
     title: 'Блог беспечного авантюриста',
-    description: 'Яндексойд, путешественник, авантюрист, беспечный и непредсказуемый. Люблю путешествовать, писать и делиться своими историями. Все мои путешествия и истории о них вы можете найти здесь (шутка, тут только про код).',
+    description: 'Путешественник, авантюрист, беспечный и&nbsp;непредсказуемый. Люблю путешествовать, писать и&nbsp;делиться своими историями. Все мои путешествия и&nbsp;истории о&nbsp;них вы&nbsp;можете найти здесь (шутка, тут только про код).',
   },
   plugins: [
+    'gatsby-plugin-postcss',
     {
       resolve: `gatsby-source-filesystem`,
-      plugins: [
-        {
-          resolve: `gatsby-remark-images`,
-        }
-      ],
       options: {
         name: `images`,
         path: `${__dirname}/content/knowledgebase/images`,
@@ -43,6 +42,14 @@ module.exports = {
         options: {
             plugins: [
                 {
+                  resolve: `gatsby-remark-prismjs`,
+                  options: {
+                    classPrefix: "language-",
+                    aliases: { sh: "bash" }
+                  }
+                },
+                'gatsby-remark-gifs',
+                {
                   resolve: `gatsby-remark-images`,
                   options: {
                     maxWidth: 630,
@@ -55,6 +62,18 @@ module.exports = {
                         markdownFolder: `${__dirname}/content/knowledgebase`, // optional
                         highlightClassName: 'highlight', // optional
                     },
+                },
+                {
+                  resolve: "@idmyn/gatsby-remark-wiki-link",
+                  options: {
+                    pageResolver: (name) => {
+                      console.log('name', name);
+                      return [name.replace(/ /g, '-').toLowerCase()]
+                    },
+                    hrefTemplate: (permalink) => {
+                      return `/${slufify(permalink, { lower: true })}/`
+                    }
+                  }
                 },
             ]
         }
