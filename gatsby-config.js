@@ -25,16 +25,9 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
-        path: `${__dirname}/content/knowledgebase/images`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
         path: `${__dirname}/content/knowledgebase`,
         name: `blog`,
-        ignore: [`**/\.obsidian`, `**/images`]
+        ignore: [`**/\.obsidian`]
       },
     },
     {
@@ -67,7 +60,6 @@ module.exports = {
                   resolve: "@idmyn/gatsby-remark-wiki-link",
                   options: {
                     pageResolver: (name) => {
-                      console.log('name', name);
                       return [name.replace(/ /g, '-').toLowerCase()]
                     },
                     hrefTemplate: (permalink) => {

@@ -1,11 +1,27 @@
 const path = require("path")
 const { createFilePath } = require("gatsby-source-filesystem")
-
+const dotenv = require('dotenv');
 /*
  * npm install slugify - пакет нужен чтобы превращать заголовки в слаги на латинице
  * Например "Привет мир" => "privet-mir"
  */ 
 const slugify = require("slugify");
+
+const envVars = dotenv.config().parsed;
+
+const envKeys = Object.keys(envVars).reduce((acc, env) => {
+  acc[`process.env.${env}`] = JSON.stringify(envVars[env]);
+  return acc;
+}, {}); // { SOME_ENV_VAR: '"SOME_VALUE"', ... }
+
+exports.onCreateWebpackConfig = ({ stage, rules, loaders, plugins, actions }) => {
+  actions.setWebpackConfig({
+    plugins: [
+      // Add the environment variables to webpack.DefinePlugin with define().
+      plugins.define(envKeys)
+    ]
+  });
+};
 
 /**
  * Создаем поля slug и title для каждого поста
