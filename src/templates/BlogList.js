@@ -13,7 +13,7 @@ import { UserInfo } from "../components/UserInfo";
 export const blogListQuery = graphql`
   query BlogListQuery($skip: Int!, $limit: Int!) {
     allMarkdownRemark(
-      sort: { frontmatter: { date: DESC }}
+      sort: { frontmatter: { date: ASC }}
       limit: $limit
       skip: $skip
     ) {
