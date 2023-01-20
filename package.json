@@ -18,6 +18,7 @@
     "gatsby-plugin-catch-links": "^5.4.0",
     "gatsby-plugin-image": "^3.4.0",
     "gatsby-plugin-sharp": "^5.4.0",
+    "gatsby-plugin-sitemap": "^6.4.0",
     "gatsby-remark-gifs": "^1.1.0",
     "gatsby-remark-images": "^7.4.0",
     "gatsby-remark-obsidian": "^0.5.0",

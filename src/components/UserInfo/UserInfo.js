@@ -9,12 +9,12 @@ export function UserInfo() {
                     description
                     title
                     social {
-                        siteUrl
                         twitter
                         twitterUsername
                         github
                         profileImage
                     }
+                    siteUrl
                 }
             }
         }

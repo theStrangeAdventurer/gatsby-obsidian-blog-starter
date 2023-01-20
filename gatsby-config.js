@@ -13,14 +13,19 @@ module.exports = {
     social: {
       twitter: 'https://twitter.com/the_strange_dev',
       github: 'https://github.com/theStrangeAdventurer?tab=repositories',
-      siteUrl: 'https://thestrangeadventurer.com',
       twitterUsername: '@the_strange_dev',
       profileImage: '/profile.jpg'
     },
+    siteUrl: 'https://thestrangeadventurer.com',
     title: 'Блог беспечного авантюриста',
     description: 'Путешественник, авантюрист, беспечный и&nbsp;непредсказуемый. Люблю путешествовать, писать и&nbsp;делиться своими историями. Все мои путешествия и&nbsp;истории о&nbsp;них вы&nbsp;можете найти здесь (шутка, тут только про код).',
   },
   plugins: [
+    /**
+     * NOTE: Fhis plugin only generates output when run in production mode!
+     * To test your sitemap, run: gatsby build && gatsby serve
+     */
+    `gatsby-plugin-sitemap`,
     'gatsby-plugin-postcss',
     {
       resolve: `gatsby-source-filesystem`,
