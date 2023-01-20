@@ -17,6 +17,7 @@
     "gatsby": "^5.4.0",
     "gatsby-plugin-catch-links": "^5.4.0",
     "gatsby-plugin-image": "^3.4.0",
+    "gatsby-plugin-robots-txt": "^1.8.0",
     "gatsby-plugin-sharp": "^5.4.0",
     "gatsby-plugin-sitemap": "^6.4.0",
     "gatsby-remark-gifs": "^1.1.0",

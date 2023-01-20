@@ -21,6 +21,12 @@ module.exports = {
     description: 'Путешественник, авантюрист, беспечный и&nbsp;непредсказуемый. Люблю путешествовать, писать и&nbsp;делиться своими историями. Все мои путешествия и&nbsp;истории о&nbsp;них вы&nbsp;можете найти здесь (шутка, тут только про код).',
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      /**
+       * Options: https://www.gatsbyjs.com/plugins/gatsby-plugin-robots-txt/#options
+       */
+    },
     /**
      * NOTE: Fhis plugin only generates output when run in production mode!
      * To test your sitemap, run: gatsby build && gatsby serve
