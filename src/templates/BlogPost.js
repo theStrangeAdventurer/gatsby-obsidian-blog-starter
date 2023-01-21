@@ -1,5 +1,6 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
+import { SEO } from '../components/SEO';
 
 /**
  * Запрос для получения одного поста по его slug
@@ -11,6 +12,7 @@ export const query = graphql`
     query BlogPageQuery($slug: String!) {
         markdownRemark(fields: {slug: {eq: $slug}}) {
             html
+            excerpt
             frontmatter {
                 date
             }
@@ -37,4 +39,13 @@ export default function BlogPage(props) {
         </div>
         <div dangerouslySetInnerHTML={{ __html: html }}/>
     </div>
+}
+
+export const Head = (props) => {
+    const { markdownRemark } = props.data;
+    const { excerpt, fields } = markdownRemark;
+    const { title } = fields;
+    return (
+        <SEO title={title} description={excerpt} />
+    )
 }

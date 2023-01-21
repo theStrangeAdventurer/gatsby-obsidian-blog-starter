@@ -22,6 +22,13 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: 'gatsby-plugin-htaccess',
+      options: {
+          https: true,
+          www: false,
+      }
+    },
+    {
       resolve: 'gatsby-plugin-robots-txt',
       /**
        * Options: https://www.gatsbyjs.com/plugins/gatsby-plugin-robots-txt/#options

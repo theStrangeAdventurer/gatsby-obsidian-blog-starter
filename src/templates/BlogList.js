@@ -2,6 +2,7 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import { Pagination } from "../components/Pagination";
 import { UserInfo } from "../components/UserInfo";
+import { SEO } from '../components/SEO';
 
 /**
  * Запрос для получения списка постов, отсортированных по дате
@@ -63,3 +64,7 @@ export default function BlogList(props) {
         </div>
     )
 }
+
+export const Head = () => (
+  <SEO />
+)

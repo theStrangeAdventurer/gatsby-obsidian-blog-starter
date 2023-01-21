@@ -16,6 +16,7 @@
     "@idmyn/gatsby-remark-wiki-link": "^1.0.0",
     "gatsby": "^5.4.0",
     "gatsby-plugin-catch-links": "^5.4.0",
+    "gatsby-plugin-htaccess": "^1.4.0",
     "gatsby-plugin-image": "^3.4.0",
     "gatsby-plugin-robots-txt": "^1.8.0",
     "gatsby-plugin-sharp": "^5.4.0",
