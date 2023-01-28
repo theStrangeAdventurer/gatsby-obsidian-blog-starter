@@ -45,7 +45,7 @@ module.exports = {
       options: {
         path: `${__dirname}/content/knowledgebase`,
         name: `blog`,
-        ignore: [`**/\.obsidian`]
+        ignore: [`**/\.obsidian`, `**/Templates`]
       },
     },
     {

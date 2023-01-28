@@ -30,9 +30,22 @@ exports.onCreateWebpackConfig = ({ stage, rules, loaders, plugins, actions }) =>
  * Функция вызывается при создании каждого поста
  */
 exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
+  const { createNodeField } = actions;
+
   if (node.internal.type === `MarkdownRemark`) {
+    if (node.frontmatter.date) {
+      const [day, month, year] = node.frontmatter.date.split('-');
+      const date = new Date(`${year}-${month}-${day}`).toISOString();
+      node.frontmatter.date = date;
+    }
+    
     const value = createFilePath({ node, getNode });
+   
+    createNodeField({
+      name: `stage`,
+      node,
+      value: node.frontmatter.stage,
+    })
 
     createNodeField({
       name: `slug`,
@@ -65,6 +78,7 @@ exports.createPages = async function ({ actions, graphql }) {
           node {
             fields {
               slug
+              stage
             }
           }
         }
@@ -73,6 +87,8 @@ exports.createPages = async function ({ actions, graphql }) {
   `)
 
   const posts = data.allMarkdownRemark.edges
+    .filter(({ node }) => !(node.fields.stage || '').includes('inProgress'));
+
   const POSTS_PER_PAGE = 8 // Определяем сколько постов будет на одной странице
   const numPages = Math.ceil(posts.length / POSTS_PER_PAGE) // Считаем сколько всего страниц
 
@@ -81,13 +97,13 @@ exports.createPages = async function ({ actions, graphql }) {
    * в качестве компонента, который будет отвечать за рендеринг
    * указываем src/templates/BlogPost.js
    */
-  data.allMarkdownRemark.edges.forEach((edge) => {
-    const { slug, title } = edge.node.fields
+  posts.forEach((edge) => {
+    const { slug, title, stage } = edge.node.fields
 
     actions.createPage({
       path: slug,
       component: path.resolve(process.cwd(), `src/templates/BlogPost.js`),
-      context: { slug, title },
+      context: { slug, title, stage },
     })
   })
 

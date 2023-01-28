@@ -1,5 +1,9 @@
 import { graphql, useStaticQuery } from "gatsby"
 
+/**
+ * 
+ * @returns {{ description: string; title: string; siteUrl: string; social: { github: string; profileImage: string; twitter: string; twitterUsername: string; }}} siteMetadata
+ */
 export const useSiteMetadata = () => {
     const data = useStaticQuery(graphql`
       query {
