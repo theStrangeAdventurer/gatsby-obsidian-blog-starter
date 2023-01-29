@@ -19,3 +19,25 @@ After that , in `./content` directory will appear `your_vault_folder_name` direc
 - `cp .env.examlpe .env` and change METRIKA_TRACKING_ID to real traking id or remove value if you don't need Yandex Metrika in your blog
 
 - `npm run dev` 
+
+## Markdown requirements
+All posts should have some [frontmatter](https://jekyllrb.com/docs/front-matter/) fields, below you can see an example:
+```markdown
+---
+date: DD-MM-YYYY
+stage: one of inProgress, readyToPublish and finished
+---
+```
+If you want to change date format you should to apply the changes as well in [`gatsby-node.js`](./gatsby-node.js)
+Posts which have stage `inProgress` will not participate with the build and will not be displayed on site
+
+## DEPLOY
+It is assumed,that you already have ssh connection to your remote server. Also you should specify three variables in `.env` file
+
+```sh
+DEPLOY_USER=user
+DEPLOY_HOST=host
+DEPLOY_PATH=/path/to/remove/server/folder
+```
+
+After that you can deploy your blog via scp, by run script `npm run deploy` (this is simple js wrapper around scp)

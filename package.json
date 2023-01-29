@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-starter-hello-world",
+  "name": "gatsby-blog-starter",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
+  "description": "A simplified bare-bones blog starter for Gatsby",
   "version": "0.1.0",
   "license": "0BSD",
   "scripts": {
@@ -10,10 +10,12 @@
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "deploy": "gatsby build && node src/scripts/deploy"
   },
   "dependencies": {
     "@idmyn/gatsby-remark-wiki-link": "^1.0.0",
+    "dotenv": "^16.0.3",
     "gatsby": "^5.4.0",
     "gatsby-plugin-catch-links": "^5.4.0",
     "gatsby-plugin-htaccess": "^1.4.0",
@@ -34,10 +36,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
+    "url": "https://github.com/theStrangeAdventurer/gatsby-obsidian-blog-starter"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/theStrangeAdventurer/gatsby-obsidian-blog-starter/issues"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
