@@ -11,7 +11,7 @@
     "start": "gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "deploy": "gatsby build && node src/scripts/deploy"
+    "deploy": "gatsby clean && gatsby build && node src/scripts/deploy"
   },
   "dependencies": {
     "@idmyn/gatsby-remark-wiki-link": "^1.0.0",
