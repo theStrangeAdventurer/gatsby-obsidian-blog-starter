@@ -22,6 +22,48 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: 'gatsby-plugin-feed',
+      options: {
+        feeds: [
+          {
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
+              return allMarkdownRemark.nodes.map(node => {
+                const postUrl = `${site.siteMetadata.siteUrl}/${node.fields.slug}/`;
+                return Object.assign({}, node.frontmatter, {
+                  title: node.fields.title,
+                  description: `${node.excerpt}\nТеги: ${(node.frontmatter.tags || []).join(',')}`,
+                  date: node.frontmatter.date,
+                  url: postUrl,
+                  guid: postUrl,
+                })
+              })
+            },
+            query: `
+              {
+                allMarkdownRemark(
+                  sort: { order: DESC, fields: [frontmatter___date] },
+                ) {
+                  nodes {
+                    excerpt
+                    fields { 
+                      slug
+                      title
+                    }
+                    frontmatter {
+                      date
+                      tags
+                    }
+                  }
+                }
+              }
+            `,
+            output: "/rss.xml",
+            title: "The Strange Adventurer's RSS Feed",
+          }
+        ]
+      }
+    },
+    {
       resolve: 'gatsby-plugin-htaccess',
       options: {
           https: true,
