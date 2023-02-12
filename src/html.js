@@ -11,6 +11,7 @@ export default function HTML(props) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
+        {process.env.YANDEX_VERIFICATION_CODE && <meta name="yandex-verification" content={process.env.YANDEX_VERIFICATION_CODE} />}
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>
