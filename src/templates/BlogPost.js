@@ -13,6 +13,7 @@ export const query = graphql`
     query BlogPageQuery($slug: String!) {
         markdownRemark(fields: {slug: {eq: $slug}}) {
             html
+            htmlAst
             excerpt
             frontmatter {
                 date
@@ -51,9 +52,28 @@ export default function BlogPage(props) {
 
 export const Head = (props) => {
     const { markdownRemark } = props.data;
-    const { excerpt, fields } = markdownRemark;
+    const { excerpt, fields, htmlAst } = markdownRemark;
     const { title } = fields;
     return (
-        <SEO title={title} description={excerpt} />
+        <SEO image={findFirstImage(htmlAst)} title={title} description={excerpt} />
     )
+}
+
+function findFirstImage(astNode) {
+    if (astNode?.type === 'element' && astNode?.tagName === 'img') {
+      return astNode.properties.src;
+    }
+    
+    let imgSrc = null;
+    let i = 0;
+
+    while (astNode && typeof astNode?.children?.[i] === 'object') {
+        imgSrc = findFirstImage(astNode.children[i]);
+        if (imgSrc) {
+            break;
+        }
+        i++;
+    }
+
+    return imgSrc;
 }

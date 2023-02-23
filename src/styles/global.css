@@ -1,5 +1,19 @@
 @tailwind base;
 
+
+img.gatsby-resp-image-image {
+    border-radius: 8px!important;
+}
+
+.gatsby-resp-image-background-image {
+    border-radius: 8px!important;
+}
+
+.gatsby-resp-image-wrapper {
+    margin-top: 1rem!important;
+    margin-bottom: 1rem!important;
+}
+
 /*
  * Описываем базовые стили для всего
  * только так мы можем стилизовать статьи
@@ -25,10 +39,6 @@
         @apply text-lg;
     }
     
-    .gatsby-resp-image-wrapper {
-        @apply mb-2 mt-2;
-    }
-
     small {
         @apply text-sm;
     }
@@ -41,6 +51,8 @@
         @apply text-indigo-600 hover:underline hover:text-indigo-900 transition-all ease-in-out duration-200;
     }
 
+
 }
 @tailwind components;
 @tailwind utilities;
+
