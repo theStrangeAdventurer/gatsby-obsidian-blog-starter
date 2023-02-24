@@ -1,10 +1,11 @@
 import React from 'react'
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
 import { TwitterIcon, GithubIcon } from '../Icons';
+import * as styles from './UserInfo.module.css';
 
 export function UserInfo() {
     const data = useSiteMetadata();
-    const {
+    let {
         title,
         description,
         author,
@@ -16,6 +17,15 @@ export function UserInfo() {
         twitter,
         twitterUsername,
     } = data.social;
+
+    let titleMatch = title.match(/%(\w+)%/);
+
+    let selectedWord = null;
+
+    if (titleMatch) {
+        title = title.replace(titleMatch[0], '');
+        selectedWord = titleMatch[1];
+    }
 
     return (
         <div className="xs:flex-col sm:flex sm:items-center gap-8 mb-16">
@@ -40,9 +50,10 @@ export function UserInfo() {
             </div>
             <div>
                 <h3
-                    className="xs:text-l font-bold text-zinc-800 sm:text-5xl"
+                    className={" xs:text-l font-bold text-zinc-800 sm:text-5xl"}
                 >
                     {title}
+                    {selectedWord ? <span className={styles.gradientTitle}>{selectedWord}</span> : null}
                 </h3>
                 <p
                     style={{ maxWidth: 800 }}

@@ -17,8 +17,8 @@ module.exports = {
       profileImage: '/profile.jpg'
     },
     siteUrl: 'https://thestrangeadventurer.com',
-    title: 'Блог беспечного авантюриста',
-    description: 'Путешественник, авантюрист, беспечный и&nbsp;непредсказуемый. Люблю путешествовать, писать и&nbsp;делиться своими историями. Все мои путешествия и&nbsp;истории о&nbsp;них вы&nbsp;можете найти здесь (шутка, тут только про код).',
+    title: 'The strange %adventurer%',
+    description: 'Записки программиста. Кодим будущее вместе: знания, опыт и творчество!',
   },
   plugins: [
     {

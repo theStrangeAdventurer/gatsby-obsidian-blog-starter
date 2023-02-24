@@ -6,7 +6,7 @@ export const SEO = ({ title, description, pathname, children, image }) => {
     const { profileImage, twitterUsername } = social;
 
     const seo = {
-        title: title || defaultTitle,
+        title: title || defaultTitle.replace(/%/g, ''),
         description: description || defaultDescription,
         image: image ? `${siteUrl}${image}` : `${siteUrl}${profileImage}`,
         url: `${siteUrl}${pathname || ``}`,
