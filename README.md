@@ -6,6 +6,9 @@
 </p>
 # Gatsby's Obsidian blog starter
 
+## Example
+An example of a blog that works on this code base can be viewed [here](https://thestrangeadventurer.com). By the way, I post my notes there, in particular there is a series of articles about creating my blog. If you are wondering how to create your blog from scratch.
+
 ## Quick start
 
 - Create symbol link from your Obsidian vault to `./content` folder:
