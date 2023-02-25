@@ -19,6 +19,7 @@ export const query = graphql`
             frontmatter {
                 date
                 stage
+                tags
             }
             fields {
                 title
@@ -33,7 +34,8 @@ export const query = graphql`
 export default function BlogPage(props) {
     const { markdownRemark } = props.data;
     const { html, fields, frontmatter } = markdownRemark;
-    const { title, tags = [] } = fields;
+    const { title } = fields;
+    const { tags = [] } = frontmatter;
     console.log("TAGS", tags);
     const { date, stage } = frontmatter;
     const formattedDate = new Intl.DateTimeFormat('ru-Ru').format(new Date(date));
