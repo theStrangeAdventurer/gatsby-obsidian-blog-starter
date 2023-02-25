@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 
 export default function HTML(props) {
   return (
@@ -11,6 +10,7 @@ export default function HTML(props) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
+        {/* Site verification meta tag for https://webmaster.yandex.(com|ru) */}
         {process.env.YANDEX_VERIFICATION_CODE && <meta name="yandex-verification" content={process.env.YANDEX_VERIFICATION_CODE} />}
         {props.headComponents}
       </head>
@@ -22,6 +22,7 @@ export default function HTML(props) {
           dangerouslySetInnerHTML={{ __html: props.body }}
         />
         {props.postBodyComponents}
+        {/* Yandex.Metrika counter code https://metrika.yandex.ru */}
         {process.env.METRIKA_TRACKING_ID && <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -42,13 +43,4 @@ export default function HTML(props) {
       </body>
     </html>
   )
-}
-
-HTML.propTypes = {
-  htmlAttributes: PropTypes.object,
-  headComponents: PropTypes.array,
-  bodyAttributes: PropTypes.object,
-  preBodyComponents: PropTypes.array,
-  body: PropTypes.string,
-  postBodyComponents: PropTypes.array,
 }

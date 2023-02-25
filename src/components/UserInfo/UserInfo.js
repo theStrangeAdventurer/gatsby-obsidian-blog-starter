@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSiteMetadata } from '../../hooks/use-site-metadata';
+import { GradientText } from '../GradientText';
+import { HeroTitle } from '../HeroTitle/HeroTitle';
 import { TwitterIcon, GithubIcon } from '../Icons';
-import * as styles from './UserInfo.module.css';
 
 export function UserInfo() {
     const data = useSiteMetadata();
@@ -49,12 +50,10 @@ export function UserInfo() {
                 </div>
             </div>
             <div>
-                <h3
-                    className={" xs:text-l font-bold text-zinc-800 sm:text-5xl"}
-                >
+                <HeroTitle as='h1'>
                     {title}
-                    {selectedWord ? <span className={styles.gradientTitle}>{selectedWord}</span> : null}
-                </h3>
+                    {selectedWord ? <GradientText>{selectedWord}</GradientText> : null}
+                </HeroTitle>
                 <p
                     style={{ maxWidth: 800 }}
                     className='mt-4 text-base text-zinc-600'

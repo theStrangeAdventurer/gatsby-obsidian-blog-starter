@@ -20,7 +20,7 @@ export function Footer() {
                 </div>
                 <div className='flex justify-center mt-4'>
                     <p className='text-indigo-500'>
-                        © {currentYear} {title}
+                        © {currentYear} {title.replace(/%/g, '')}
                     </p>
                 </div>
             </div>

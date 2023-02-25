@@ -1,6 +1,7 @@
 const path = require("path")
 const { createFilePath } = require("gatsby-source-filesystem")
 const dotenv = require('dotenv');
+const kebabCase = require('lodash/kebabcase');
 /*
  * npm install slugify - пакет нужен чтобы превращать заголовки в слаги на латинице
  * Например "Привет мир" => "privet-mir"
@@ -83,8 +84,30 @@ exports.createPages = async function ({ actions, graphql }) {
           }
         }
       }
+      tagsGroup: allMarkdownRemark(limit: 2000) {
+        group(field: { frontmatter: { tags: SELECT }}) {
+          fieldValue
+        }
+      }
     }
   `)
+
+  const tags = data.tagsGroup.group;
+
+  /**
+   * Создаем страницу для каждого тега
+   * в качестве компонента, который будет отвечать за рендеринг
+   * указываем src/templates/Tags.js
+   */
+  tags.forEach(({ fieldValue }) => {
+    actions.createPage({
+      path: `/tags/${kebabCase(fieldValue)}/`,
+      component: path.resolve(process.cwd(), `src/templates/Tags.js`),
+      context: {
+        tag: fieldValue,
+      },
+    })
+  });
 
   const posts = data.allMarkdownRemark.edges
     .filter(({ node }) => !(node.fields.stage || '').includes('inProgress'));

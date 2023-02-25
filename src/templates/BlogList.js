@@ -4,6 +4,7 @@ import { Pagination } from "../components/Pagination";
 import { UserInfo } from "../components/UserInfo";
 import { SEO } from '../components/SEO';
 import { Footer } from '../components/Footer';
+import { ContentWrapper } from "../components/ContentWrapper";
 
 /**
  * Запрос для получения списка постов, отсортированных по дате
@@ -47,7 +48,7 @@ export default function BlogList(props) {
 
     return (
         <>
-          <div className='container mx-auto px-4 mt-16 relative'>
+          <ContentWrapper>
               <UserInfo />
               <div className='grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8'>
                 {edges.map(({ node }) => {
@@ -68,12 +69,12 @@ export default function BlogList(props) {
                 })}
               </div>
               <Pagination pageContext={props.pageContext} />
-          </div>
+          </ContentWrapper>
           <Footer />
         </>
     )
 }
-
+// FIXME: сформировать title здесь и добавить текущий номер страницы
 export const Head = () => (
   <SEO />
 )

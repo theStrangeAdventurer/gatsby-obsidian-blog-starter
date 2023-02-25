@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql, Link } from 'gatsby';
 import { SEO } from '../components/SEO';
 import { Footer } from '../components/Footer/Footer';
+import { ContentWrapper } from '../components/ContentWrapper';
 
 /**
  * Запрос для получения одного поста по его slug
@@ -32,11 +33,12 @@ export const query = graphql`
 export default function BlogPage(props) {
     const { markdownRemark } = props.data;
     const { html, fields, frontmatter } = markdownRemark;
-    const { title } = fields;
+    const { title, tags = [] } = fields;
+    console.log("TAGS", tags);
     const { date, stage } = frontmatter;
     const formattedDate = new Intl.DateTimeFormat('ru-Ru').format(new Date(date));
     return <>
-        <div className='container mx-auto px-4 mt-16'>
+        <ContentWrapper>
             <h1 className='text-4xl font-bold mb-4'>{title}</h1>
             <div className='flex gap-2 mb-4'>
                 <Link to='/' className='text-indigo-600'>{'Назад'}</Link>
@@ -44,8 +46,9 @@ export default function BlogPage(props) {
                 {stage === 'readyToPublish' &&
                     <span className="text-green-500 ml-2">Дополняется...</span>}
             </div>
+            
             <div dangerouslySetInnerHTML={{ __html: html }}/>
-        </div>
+        </ContentWrapper>
         <Footer />
     </>
 }
