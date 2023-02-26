@@ -3,6 +3,7 @@ import { graphql, Link } from 'gatsby';
 import { SEO } from '../components/SEO';
 import { Footer } from '../components/Footer/Footer';
 import { ContentWrapper } from '../components/ContentWrapper';
+import { Tags } from '../components/Tags';
 
 /**
  * Запрос для получения одного поста по его slug
@@ -35,20 +36,20 @@ export default function BlogPage(props) {
     const { markdownRemark } = props.data;
     const { html, fields, frontmatter } = markdownRemark;
     const { title } = fields;
-    const { tags = [] } = frontmatter;
-    console.log("TAGS", tags);
+    let { tags = [] } = frontmatter;
+    tags = tags.map(tag => ({ value: tag, title: `Перейти к постам с тегом ${tag}` }));
     const { date, stage } = frontmatter;
     const formattedDate = new Intl.DateTimeFormat('ru-Ru').format(new Date(date));
     return <>
         <ContentWrapper>
             <h1 className='text-4xl font-bold mb-4'>{title}</h1>
+            <Tags tags={tags} />
             <div className='flex gap-2 mb-4'>
                 <Link to='/' className='text-indigo-600'>{'Назад'}</Link>
                 <span className='text-gray-300'>{formattedDate}</span>
                 {stage === 'readyToPublish' &&
                     <span className="text-green-500 ml-2">Дополняется...</span>}
             </div>
-            
             <div dangerouslySetInnerHTML={{ __html: html }}/>
         </ContentWrapper>
         <Footer />
