@@ -12,6 +12,11 @@ export default function HTML(props) {
         />
         {/* Site verification meta tag for https://webmaster.yandex.(com|ru) */}
         {process.env.YANDEX_VERIFICATION_CODE && <meta name="yandex-verification" content={process.env.YANDEX_VERIFICATION_CODE} />}
+        {/* Extra meta tags */}
+        {process.env.EXTRA_METATAGS ? (process.env.EXTRA_METATAGS.split(',').map(mt => {
+          const [name, content] = mt.split(':');
+          return <meta key={mt} name={name} content={content} />
+        })) : ''}
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>

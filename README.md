@@ -24,6 +24,7 @@ After that , in `./content` directory will appear `your_vault_folder_name` direc
   - METRIKA_TRACKING_ID
   - YANDEX_VERIFICATION_CODE
   - FAVICON_DOMAIN
+  - EXTRA_METATAGS=metaname:metacontent,anothermetaname:anothermetacontent
 
 > Or remove values if you don't need Yandex Metrika, Yandex Webmaster, or favicons in your blog
 
