@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@idmyn/gatsby-remark-wiki-link": "1.0.0",
+    "classnames": "^2.3.2",
     "dotenv": "16.0.3",
     "gatsby": "5.4.0",
     "gatsby-plugin-catch-links": "5.4.0",

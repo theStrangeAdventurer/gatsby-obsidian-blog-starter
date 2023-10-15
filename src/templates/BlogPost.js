@@ -4,6 +4,8 @@ import { SEO } from '../components/SEO';
 import { Footer } from '../components/Footer/Footer';
 import { ContentWrapper } from '../components/ContentWrapper';
 import { Tags } from '../components/Tags';
+import { GithubRepo } from '../components/GithubRepo';
+import * as styles from './BlogPost.module.css'; 
 
 /**
  * Запрос для получения одного поста по его slug
@@ -21,6 +23,7 @@ export const query = graphql`
                 date
                 stage
                 tags
+                github
             }
             fields {
                 title
@@ -36,19 +39,25 @@ export default function BlogPage(props) {
     const { markdownRemark } = props.data;
     const { html, fields, frontmatter } = markdownRemark;
     const { title } = fields;
-    let { tags = [] } = frontmatter;
+
+    let { tags = [], github, date, stage } = frontmatter;
     tags = tags.map(tag => ({ value: tag, title: `Перейти к постам с тегом ${tag}` }));
-    const { date, stage } = frontmatter;
     const formattedDate = new Intl.DateTimeFormat('ru-Ru').format(new Date(date));
+
     return <>
         <ContentWrapper>
             <h1 className='text-4xl font-bold mb-4'>{title}</h1>
-            <Tags tags={tags} />
             <div className='flex gap-2 mb-4'>
                 <Link to='/' className='text-indigo-600'>{'Назад'}</Link>
                 <span className='text-gray-300'>{formattedDate}</span>
                 {stage === 'readyToPublish' &&
                     <span className="text-green-500 ml-2">Дополняется...</span>}
+            </div>
+            <div style={{ display: github ? 'flex' : 'block'  }} className={styles.tagsContainer}>
+                <div>{github ? <GithubRepo url={github}  /> : null}</div>
+                <div>
+                    <Tags tags={tags} />
+                </div>
             </div>
             <div dangerouslySetInnerHTML={{ __html: html }}/>
         </ContentWrapper>

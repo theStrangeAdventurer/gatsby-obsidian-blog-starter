@@ -1,0 +1,38 @@
+.text {
+    text-decoration: none;
+}
+
+.text:hover {
+    text-decoration: none;
+}
+
+a .text {
+    text-decoration: none;
+}
+
+a:hover .text {
+    text-decoration: none;
+}
+
+.container:hover { 
+    text-decoration: none;
+}
+
+.container {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    border-radius: 16px;
+    gap: 8px;
+}
+
+.title {
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.subtitle {
+    font-size: 14px;
+    line-height: 14px;
+}

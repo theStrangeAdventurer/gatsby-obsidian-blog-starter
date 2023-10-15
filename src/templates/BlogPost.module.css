@@ -1,0 +1,17 @@
+.tagsContainer {
+    display: flex;
+    gap: 1rem;
+    border: 3px solid #e6e6e6;
+    padding: 1rem;
+    margin-bottom: 10px;
+    border-radius: 16px;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .tagsContainer {
+        padding: 0.5rem;
+        flex-direction: column;
+    }
+    
+}
