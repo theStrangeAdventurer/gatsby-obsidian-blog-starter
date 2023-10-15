@@ -41,6 +41,7 @@ All posts should have some [frontmatter](https://jekyllrb.com/docs/front-matter/
 date: DD-MM-YYYY
 stage: <inProgress | readyToPublish | finished>
 tags: ["tag","anotherTag"]
+github: https://link/to/your/repo(OPTIONAL)
 ---
 ```
 If you want to change date format you should to apply the changes as well in [`gatsby-node.js`](./gatsby-node.js)
