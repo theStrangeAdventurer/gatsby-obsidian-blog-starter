@@ -19,7 +19,14 @@ export const blogListQuery = graphql`
       sort: { frontmatter: { date: DESC }}
       limit: $limit
       skip: $skip
-      filter: {fields: {stage: {ne: "inProgress"}}}
+      filter: {
+        frontmatter: {
+          stage: {ne: null}
+        }
+        fields: {
+          stage: {ne: "inProgress"}
+        }
+      }
     ) {
       edges {
         node {

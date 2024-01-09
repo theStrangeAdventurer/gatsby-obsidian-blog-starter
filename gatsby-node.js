@@ -79,7 +79,8 @@ exports.createPages = async function ({ actions, graphql }) {
           node {
             fields {
               slug
-              stage
+              stage,
+              title
             }
           }
         }
@@ -110,7 +111,9 @@ exports.createPages = async function ({ actions, graphql }) {
   });
 
   const posts = data.allMarkdownRemark.edges
-    .filter(({ node }) => !(node.fields.stage || '').includes('inProgress'));
+    .filter(({ node }) => {
+      return node.fields.stage && !(node.fields.stage || '').includes('inProgress')
+    });
 
   const POSTS_PER_PAGE = 8 // Определяем сколько постов будет на одной странице
   const numPages = Math.ceil(posts.length / POSTS_PER_PAGE) // Считаем сколько всего страниц

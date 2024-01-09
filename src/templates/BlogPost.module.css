@@ -1,11 +1,37 @@
 .tagsContainer {
+    position: relative;
     display: flex;
     gap: 1rem;
-    border: 3px solid #e6e6e6;
     padding: 1rem;
     margin-bottom: 10px;
-    border-radius: 16px;
     align-items: center;
+    background: white;
+    z-index: 1;
+}
+
+.tagsContainer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #020617;
+    z-index: -1;
+    border-radius: 16px;
+}
+
+.tagsContainer::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    width: calc(100% + 6px);
+    height: calc(100% + 6px);
+    background-size: 400% 400%;
+    background: linear-gradient(44deg,#ff5eff, #5046e5 25%,#ff5eff);
+    z-index: -2;
+    border-radius: 18px;
 }
 
 @media screen and (max-width: 768px) {
@@ -14,4 +40,29 @@
         flex-direction: column;
     }
     
+}
+
+.post {}
+
+.post blockquote {
+    background: #fff;
+    border-left: 10px solid #f0efff;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+
+.post pre[class*="language-"] {
+    background-color: #231424;
+}
+.post blockquote:before {
+    color: #f0efff;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+}
+.post blockquote p {
+    display: inline;
 }

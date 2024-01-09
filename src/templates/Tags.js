@@ -51,11 +51,11 @@ export default function Tags({ pageContext, data }) {
           <GradientText>{additionalPart}</GradientText>
         </HeroTitle>
         <div className='flex gap-2 mb-4'>
-            <Link to='/' className='text-indigo-600'>{'Назад'}</Link>
+        <Link to='/' className='text-white px-4 py-2 bg-indigo-600 hover:bg-slate-900 hover:text-slate-100 rounded-lg'>{'Назад'}</Link>
             <Link to="/tags" className='text-indigo-600'>
               Все теги
             </Link>
-        </div>
+        </div>в
         <ul className='grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8'>
           {edges.map(({ node }) => {
             const { slug, title } = node.fields

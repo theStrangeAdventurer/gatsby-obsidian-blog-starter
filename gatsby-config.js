@@ -27,7 +27,9 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.nodes.map(node => {
+              return allMarkdownRemark.nodes.filter((node) => {
+                return node.frontmatter?.stage && !(node.frontmatter?.stage || '').includes('inProgress');
+              }).map(node => {
                 const postUrl = `${site.siteMetadata.siteUrl}/${node.fields.slug}/`;
                 return Object.assign({}, node.frontmatter, {
                   title: node.fields.title,
@@ -52,6 +54,7 @@ module.exports = {
                     frontmatter {
                       date
                       tags
+                      stage
                     }
                   }
                 }

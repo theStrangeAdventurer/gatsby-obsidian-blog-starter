@@ -15,7 +15,7 @@ export const Pagination = ({ pageContext }) => {
     const prevPage = currentPage - 1 === 1 ? '/' : `/page/${currentPage - 1}`
     const nextPage = `/page/${currentPage + 1}`
     const activeButtonClassName = 'text-white bg-indigo-500 shadow-lg shadow-indigo-500/50';
-    const inactiveButtonClassName = 'text-gray-900 bg-gray-50 shadow-lg shadow-gray-100/50';
+    const inactiveButtonClassName = 'text-gray-900 bg-gray-100 shadow-lg shadow-state-200/50';
     
     return (
         <div className="mb-8 mt-16 flex gap-2">
