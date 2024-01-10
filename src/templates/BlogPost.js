@@ -24,6 +24,7 @@ export const query = graphql`
                 stage
                 tags
                 github
+                updated
             }
             fields {
                 title
@@ -40,16 +41,17 @@ export default function BlogPage(props) {
     const { html, fields, frontmatter } = markdownRemark;
     const { title } = fields;
 
-    let { tags = [], github, date, stage } = frontmatter;
+    let { tags = [], github, date, stage, updated = null } = frontmatter;
     tags = tags.map(tag => ({ value: tag, title: `Перейти к постам с тегом ${tag}` }));
     const formattedDate = new Intl.DateTimeFormat('ru-Ru').format(new Date(date));
+    const updatedDate = updated ? new Intl.DateTimeFormat('ru-Ru').format(new Date(updated)) : null;
 
     return <>
         <ContentWrapper className={styles.post}>
             <h1 className='text-4xl font-bold mb-4'>{title}</h1>
             <div className='flex items-center md:justify-between gap-2 mb-4'>
                 <Link to='/' className='text-white px-4 py-2 bg-indigo-600 hover:bg-slate-900 hover:text-slate-100 rounded-lg'>{'Назад'}</Link>
-                <span className='text-gray-300'>{formattedDate}</span>
+                <span className='text-slate-400'>{`${formattedDate}${updatedDate ? `(Обновлено ${updatedDate})` : ''}`}</span>
                 {stage === 'readyToPublish' &&
                     <span className="text-green-500 ml-2">Дополняется...</span>}
             </div>
