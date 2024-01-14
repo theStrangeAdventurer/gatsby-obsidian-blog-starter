@@ -39,9 +39,27 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       const date = new Date(`${year}-${month}-${day}`).toISOString();
       node.frontmatter.date = date;
     }
+
+    if (node.frontmatter.updated) {
+      const [day, month, year] = node.frontmatter.updated.split('-');
+      const date = new Date(`${year}-${month}-${day}`).toISOString();
+      node.frontmatter.updated = date;
+    }
     
     const value = createFilePath({ node, getNode });
-   
+    
+    createNodeField({
+      name: `seoDescription`,
+      node,
+      value: node.frontmatter.seoDescription || '',
+    })
+
+    createNodeField({
+      name: `seoTitle`,
+      node,
+      value: node.frontmatter.seoTitle || '',
+    })
+
     createNodeField({
       name: `stage`,
       node,
@@ -79,8 +97,10 @@ exports.createPages = async function ({ actions, graphql }) {
           node {
             fields {
               slug
-              stage,
+              stage
               title
+              seoDescription
+              seoTitle
             }
           }
         }
@@ -124,12 +144,12 @@ exports.createPages = async function ({ actions, graphql }) {
    * указываем src/templates/BlogPost.js
    */
   posts.forEach((edge) => {
-    const { slug, title, stage } = edge.node.fields
+    const { slug, title, stage, seoDescription, seoTitle  } = edge.node.fields
 
     actions.createPage({
       path: slug,
       component: path.resolve(process.cwd(), `src/templates/BlogPost.js`),
-      context: { slug, title, stage },
+      context: { slug, title, stage, seoDescription, seoTitle },
     })
   })
 

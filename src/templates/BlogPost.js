@@ -28,6 +28,8 @@ export const query = graphql`
             }
             fields {
                 title
+                seoTitle
+                seoDescription
             }
         }
     }
@@ -70,9 +72,9 @@ export default function BlogPage(props) {
 export const Head = (props) => {
     const { markdownRemark } = props.data;
     const { excerpt, fields, htmlAst } = markdownRemark;
-    const { title } = fields;
+    const { title, seoTitle, seoDescription } = fields;
     return (
-        <SEO image={findFirstImage(htmlAst)} title={title} description={excerpt} />
+        <SEO image={findFirstImage(htmlAst)} title={seoTitle || title} description={seoDescription || excerpt} />
     )
 }
 

@@ -11,7 +11,7 @@ export function GithubRepo({ url }) {
                     <GithubIcon color='#1e293b' size={48} />
                 </div>
                 <div>
-                    <button class="bg-gray-900 text-white font-bold py-2 px-4 border-b-4 border-indigo-700 hover:border-indigo-500 rounded">
+                    <button className="bg-gray-900 text-white font-bold py-2 px-4 border-b-4 border-indigo-700 hover:border-indigo-500 rounded">
                         Перейти в Github
                     </button>
                 </div>
