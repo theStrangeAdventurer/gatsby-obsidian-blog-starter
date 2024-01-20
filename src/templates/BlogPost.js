@@ -91,19 +91,19 @@ export default function BlogPage(props) {
             <div dangerouslySetInnerHTML={{ __html: html }}/>
 
             {relatedPosts?.length > 0 && (
-                <div className="mt-8" itemscope itemtype="http://schema.org/ItemList">
+                <div className="mt-8" itemScope itemType="http://schema.org/ItemList">
                     <h3 className="text-xl font-bold mb-4">Вам также может быть интересно</h3>
                     <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                         {relatedPosts.map((post, index) => {
                             const { htmlAst } = post;
                             const imgSrc = findFirstImage(htmlAst);
                             return (
-                                <div key={post.id} className="bg-white shadow-md rounded-lg p-4" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                                    <meta itemprop="position" content={index + 1} />
-                                    <h4 className="text-lg font-semibold mb-2" itemprop="name">{post.fields.title}</h4>
-                                    {imgSrc && <img src={imgSrc} alt={post.fields.title} className="w-full h-40 object-cover mb-2" itemprop="image" />}
-                                    <p className="text-gray-600" itemprop="description">{post.excerpt}</p>
-                                    <Link to={`/${post.fields.slug}/`} className="text-blue-500 hover:underline" itemprop="url">Читать</Link>
+                                <div key={post.id} className="bg-white shadow-md rounded-lg p-4" itemProp="itemListElement" itemScope itemType="http://schema.org/ListItem">
+                                    <meta itemProp="position" content={index + 1} />
+                                    <h4 className="text-lg font-semibold mb-2" itemProp="name">{post.fields.title}</h4>
+                                    {imgSrc && <img src={imgSrc} alt={post.fields.title} className="w-full h-40 object-cover mb-2" itemProp="image" />}
+                                    <p className="text-gray-600" itemProp="description">{post.excerpt}</p>
+                                    <Link to={`/${post.fields.slug}/`} className="text-blue-500 hover:underline" itemProp="url">Читать</Link>
                                 </div>
                             );
                         })}
