@@ -7,6 +7,7 @@ const kebabCase = require('lodash/kebabcase');
  * Например "Привет мир" => "privet-mir"
  */ 
 const slugify = require("slugify");
+const { filterPosts } = require("./utils/posts");
 
 const envVars = dotenv.config().parsed;
 
@@ -77,6 +78,12 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       node,
       value: value.replace(/(^\/|\/$)/g, ''),
     })
+
+    createNodeField({
+      name: `tags`,
+      node,
+      value: node.frontmatter.tags,
+    })
   }
 }
 
@@ -95,12 +102,14 @@ exports.createPages = async function ({ actions, graphql }) {
       allMarkdownRemark {
         edges {
           node {
+            id
             fields {
               slug
               stage
               title
               seoDescription
               seoTitle
+              tags
             }
           }
         }
@@ -130,11 +139,7 @@ exports.createPages = async function ({ actions, graphql }) {
     })
   });
 
-  const posts = data.allMarkdownRemark.edges
-    .filter(({ node }) => {
-      return node.fields.stage && !(node.fields.stage || '').includes('inProgress')
-    });
-
+  const posts = filterPosts(data.allMarkdownRemark.edges);
   const POSTS_PER_PAGE = 8 // Определяем сколько постов будет на одной странице
   const numPages = Math.ceil(posts.length / POSTS_PER_PAGE) // Считаем сколько всего страниц
 
@@ -144,12 +149,13 @@ exports.createPages = async function ({ actions, graphql }) {
    * указываем src/templates/BlogPost.js
    */
   posts.forEach((edge) => {
-    const { slug, title, stage, seoDescription, seoTitle  } = edge.node.fields
+    const { id } = edge.node;
+    const { slug, title, stage, seoDescription, seoTitle, tags = [] } = edge.node.fields
 
     actions.createPage({
       path: slug,
       component: path.resolve(process.cwd(), `src/templates/BlogPost.js`),
-      context: { slug, title, stage, seoDescription, seoTitle },
+      context: { slug, id, title, stage, seoDescription, seoTitle, tags },
     })
   })
 

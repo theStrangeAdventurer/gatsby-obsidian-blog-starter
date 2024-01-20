@@ -1,3 +1,4 @@
+const { filterPosts } = require('./utils/posts');
 const slufify = require('slugify');
 /**
  * Configure your Gatsby site with this file.
@@ -27,9 +28,7 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allMarkdownRemark } }) => {
-              return allMarkdownRemark.nodes.filter((node) => {
-                return node.frontmatter?.stage && !(node.frontmatter?.stage || '').includes('inProgress');
-              }).map(node => {
+              return filterPosts(allMarkdownRemark.nodes).map(node => {
                 const postUrl = `${site.siteMetadata.siteUrl}/${node.fields.slug}/`;
                 return Object.assign({}, node.frontmatter, {
                   title: node.fields.title,

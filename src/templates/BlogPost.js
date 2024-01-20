@@ -6,6 +6,7 @@ import { ContentWrapper } from '../components/ContentWrapper';
 import { Tags } from '../components/Tags';
 import { GithubRepo } from '../components/GithubRepo';
 import * as styles from './BlogPost.module.css'; 
+import { filterPosts } from '../../utils/posts';
 
 /**
  * Запрос для получения одного поста по его slug
@@ -14,8 +15,9 @@ import * as styles from './BlogPost.module.css';
  * gatsby-node.js (module.exports = { createPages })
  */
 export const query = graphql`
-    query BlogPageQuery($slug: String!) {
+    query BlogPageQuery($slug: String!, $tags: [String!]!) {
         markdownRemark(fields: {slug: {eq: $slug}}) {
+            id
             html
             htmlAst
             excerpt
@@ -32,6 +34,24 @@ export const query = graphql`
                 seoDescription
             }
         }
+        allMarkdownRemark(filter: { frontmatter: { tags: { in: $tags }}}) {
+            nodes {
+                excerpt
+                frontmatter {
+                  github
+                  tags
+                }
+                id
+                htmlAst
+                fields {
+                  slug
+                  title
+                  stage
+                  seoDescription
+                }
+                timeToRead
+            }
+        }
     }
 `
 
@@ -39,10 +59,15 @@ export const query = graphql`
  * Рендерим пост, используя данные gql запроса
  */
 export default function BlogPage(props) {
-    const { markdownRemark } = props.data;
-    const { html, fields, frontmatter } = markdownRemark;
+    const { markdownRemark, allMarkdownRemark: _relatedPosts } = props.data;
+    const { html, fields, frontmatter, id: currentPostId } = markdownRemark;
     const { title } = fields;
 
+    /**
+     * @type{Array<import('./types').RelatedPost>}
+     */
+    const relatedPosts = filterPosts(_relatedPosts.nodes).filter(({ id }) => id !== currentPostId);
+    
     let { tags = [], github, date, stage, updated = null } = frontmatter;
     tags = tags.map(tag => ({ value: tag, title: `Перейти к постам с тегом ${tag}` }));
     const formattedDate = new Intl.DateTimeFormat('ru-Ru').format(new Date(date));
@@ -64,6 +89,27 @@ export default function BlogPage(props) {
                 </div>
             </div>
             <div dangerouslySetInnerHTML={{ __html: html }}/>
+
+            {relatedPosts?.length > 0 && (
+                <div className="mt-8" itemscope itemtype="http://schema.org/ItemList">
+                    <h3 className="text-xl font-bold mb-4">Вам также может быть интересно</h3>
+                    <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                        {relatedPosts.map((post, index) => {
+                            const { htmlAst } = post;
+                            const imgSrc = findFirstImage(htmlAst);
+                            return (
+                                <div key={post.id} className="bg-white shadow-md rounded-lg p-4" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                                    <meta itemprop="position" content={index + 1} />
+                                    <h4 className="text-lg font-semibold mb-2" itemprop="name">{post.fields.title}</h4>
+                                    {imgSrc && <img src={imgSrc} alt={post.fields.title} className="w-full h-40 object-cover mb-2" itemprop="image" />}
+                                    <p className="text-gray-600" itemprop="description">{post.excerpt}</p>
+                                    <Link to={`/${post.fields.slug}/`} className="text-blue-500 hover:underline" itemprop="url">Читать</Link>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            )}
         </ContentWrapper>
         <Footer />
     </>
