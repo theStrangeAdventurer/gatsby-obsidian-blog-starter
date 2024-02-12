@@ -15,11 +15,11 @@ module.exports = {
       twitter: 'https://twitter.com/the_strange_dev',
       github: 'https://github.com/theStrangeAdventurer?tab=repositories',
       twitterUsername: '@the_strange_dev',
-      profileImage: '/profile.jpg'
+      profileImage: '/logo.jpg'
     },
     siteUrl: 'https://thestrangeadventurer.com',
-    title: 'The strange %adventurer%',
-    description: 'Записки программиста. Если вы так же, как и я, любите фронтенд (и не только), и часто испытываете необходимость в дополнительной дозе кофеина для того, чтобы продолжить творить, то вы пришли по адресу.',
+    title: 'Strange %adventurer%',
+    description: 'Делюсь заметками и постами о фронтенде и не только. Надеюсь, ты найдешь здесь что-то полезное 😉',
   },
   plugins: [
     {
