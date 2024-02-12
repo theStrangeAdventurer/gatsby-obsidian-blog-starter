@@ -88,7 +88,7 @@ export default function BlogPage(props) {
                     <Tags tags={tags} />
                 </div>
             </div>
-            <div dangerouslySetInnerHTML={{ __html: html }}/>
+            <div className='post-content' dangerouslySetInnerHTML={{ __html: html }}/>
 
             {relatedPosts?.length > 0 && (
                 <div className="mt-8" itemScope itemType="http://schema.org/ItemList">

@@ -19,6 +19,22 @@ img.gatsby-resp-image-image {
  * только так мы можем стилизовать статьи
  */
 @layer base {
+    .post-content ul li {
+        margin-inline-start: 1rem;
+        margin-block: .5rem;
+        position: relative;
+    }
+
+    .post-content ul li::before {
+        content: '';
+        width: 4px;
+        height: 4px;
+        border-radius: 4px;
+        background: #c9c8df;
+        position: absolute;
+        top: .65rem;
+        left: -.5rem;
+    }
     html {
         @apply tracking-tighter text-slate-800;
     }
