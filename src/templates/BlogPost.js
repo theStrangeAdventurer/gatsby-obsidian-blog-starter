@@ -5,7 +5,7 @@ import { Footer } from '../components/Footer/Footer';
 import { ContentWrapper } from '../components/ContentWrapper';
 import { Tags } from '../components/Tags';
 import { GithubRepo } from '../components/GithubRepo';
-import * as styles from './BlogPost.module.css'; 
+import * as styles from './BlogPost.module.css';
 import { filterPosts } from '../../utils/posts';
 
 /**
@@ -26,6 +26,7 @@ export const query = graphql`
                 stage
                 tags
                 github
+                youtube
                 updated
             }
             fields {
@@ -67,8 +68,9 @@ export default function BlogPage(props) {
      * @type{Array<import('./types').RelatedPost>}
      */
     const relatedPosts = filterPosts(_relatedPosts.nodes).filter(({ id }) => id !== currentPostId);
-    
+
     let { tags = [], github, date, stage, updated = null } = frontmatter;
+
     tags = tags.map(tag => ({ value: tag, title: `Перейти к постам с тегом ${tag}` }));
     const formattedDate = new Intl.DateTimeFormat('ru-Ru').format(new Date(date));
     const updatedDate = updated ? new Intl.DateTimeFormat('ru-Ru').format(new Date(updated)) : null;
@@ -82,13 +84,13 @@ export default function BlogPage(props) {
                 {stage === 'readyToPublish' &&
                     <span className="text-green-500 ml-2">Дополняется...</span>}
             </div>
-            <div style={{ display: github ? 'flex' : 'block'  }} className={ 'bg-white' + ' ' + styles.tagsContainer}>
-                <div>{github ? <GithubRepo url={github}  /> : null}</div>
+            <div style={{ display: github ? 'flex' : 'block' }} className={'bg-white' + ' ' + styles.tagsContainer}>
+                <div>{github ? <GithubRepo url={github} /> : null}</div>
                 <div>
                     <Tags tags={tags} />
                 </div>
             </div>
-            <div className='post-content' dangerouslySetInnerHTML={{ __html: html }}/>
+            <div className='post-content' dangerouslySetInnerHTML={{ __html: html }} />
 
             {relatedPosts?.length > 0 && (
                 <div className="mt-8" itemScope itemType="http://schema.org/ItemList">
@@ -126,9 +128,9 @@ export const Head = (props) => {
 
 function findFirstImage(astNode) {
     if (astNode?.type === 'element' && astNode?.tagName === 'img') {
-      return astNode.properties.src;
+        return astNode.properties.src;
     }
-    
+
     let imgSrc = null;
     let i = 0;
 

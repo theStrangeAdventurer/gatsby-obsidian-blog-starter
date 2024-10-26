@@ -15,7 +15,7 @@ module.exports = {
       twitter: 'https://twitter.com/the_strange_dev',
       github: 'https://github.com/theStrangeAdventurer?tab=repositories',
       twitterUsername: '@the_strange_dev',
-      profileImage: '/logo.jpg'
+      profileImage: '/logo.png'
     },
     siteUrl: 'https://thestrangeadventurer.com',
     title: 'Strange %adventurer%',
@@ -68,8 +68,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-htaccess',
       options: {
-          https: true,
-          www: false,
+        https: true,
+        www: false,
       }
     },
     {
@@ -93,44 +93,44 @@ module.exports = {
       },
     },
     {
-        resolve: "gatsby-transformer-remark",
-        options: {
-            plugins: [
-                {
-                  resolve: `gatsby-remark-prismjs`,
-                  options: {
-                    classPrefix: "language-",
-                    aliases: { sh: "bash" }
-                  }
-                },
-                'gatsby-remark-gifs',
-                {
-                  resolve: `gatsby-remark-images`,
-                  options: {
-                    maxWidth: 630,
-                  },
-                },
-                {
-                    resolve: 'gatsby-remark-obsidian',
-                    options: {
-                        titleToURL: (title) => `/${require('slugify')(title, { lower: true })}/`, // optional
-                        markdownFolder: `${__dirname}/content/knowledgebase`, // optional
-                        highlightClassName: 'highlight', // optional
-                    },
-                },
-                {
-                  resolve: "@idmyn/gatsby-remark-wiki-link",
-                  options: {
-                    pageResolver: (name) => {
-                      return [name.replace(/ /g, '-').toLowerCase()]
-                    },
-                    hrefTemplate: (permalink) => {
-                      return `/${slufify(permalink, { lower: true })}/`
-                    }
-                  }
-                },
-            ]
-        }
+      resolve: "gatsby-transformer-remark",
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              classPrefix: "language-",
+              aliases: { sh: "bash" }
+            }
+          },
+          'gatsby-remark-gifs',
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 630,
+            },
+          },
+          {
+            resolve: 'gatsby-remark-obsidian',
+            options: {
+              titleToURL: (title) => `/${require('slugify')(title, { lower: true })}/`, // optional
+              markdownFolder: `${__dirname}/content/knowledgebase`, // optional
+              highlightClassName: 'highlight', // optional
+            },
+          },
+          {
+            resolve: "@idmyn/gatsby-remark-wiki-link",
+            options: {
+              pageResolver: (name) => {
+                return [name.replace(/ /g, '-').toLowerCase()]
+              },
+              hrefTemplate: (permalink) => {
+                return `/${slufify(permalink, { lower: true })}/`
+              }
+            }
+          },
+        ]
+      }
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,

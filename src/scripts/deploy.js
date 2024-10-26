@@ -7,5 +7,3 @@ const deploy = () => {
 }
 
 deploy();
-
- 
